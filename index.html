@@ -27,7 +27,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M32JBQMGYT"></script>
@@ -67,6 +67,149 @@
   </script>
 
   <style>
+    /* === MARQUEE TICKER BAR === */
+    .marquee-bar{
+      background: #ffce44;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 1.5px solid rgba(0,0,0,.08);
+    }
+    .marquee-track{
+      display:flex;
+      width: max-content;
+    }
+    .marquee-inner{
+      display: flex;
+      align-items: center;
+      animation: marquee 28s linear infinite;
+      padding: .52rem 0;
+    }
+    @keyframes marquee{
+      from{ transform: translateX(0); }
+      to{ transform: translateX(-100%); }
+    }
+    .marquee-item{
+      font-weight:700;
+      font-size: .82rem;
+      letter-spacing: .03em;
+      color: #1a1000;
+      padding: 0 1.6rem;
+      white-space: nowrap;
+    }
+    .marquee-sep{
+      color: rgba(0,0,0,.30);
+      font-size: .7rem;
+    }
+    @media (prefers-reduced-motion: reduce){
+      .marquee-inner{ animation: none; }
+    }
+
+    /* === PRODUCT CARD HOVER IMAGE SWAP (Farmley-inspired) === */
+    .card-media{
+      position:relative;
+      overflow:hidden;
+    }
+    .card-media img{
+      width:100%; height: 210px; object-fit:cover; display:block;
+      transition: opacity .3s ease;
+    }
+    .card-media .img-hover{
+      position:absolute; inset:0;
+      width:100%; height:100%; object-fit:cover;
+      opacity:0;
+      transition: opacity .3s ease;
+    }
+    .card:hover .img-hover{ opacity: 1; }
+    .card:hover .card-media > img:first-child{ opacity: 0; }
+
+    /* === CARD HOVER LIFT === */
+    .card{
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 28px 80px rgba(16,18,35,.14);
+    }
+
+    /* === FEATURE ICONS STRIP === */
+    .features-strip{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 2.5rem 0;
+      background: rgba(255,255,255,.75);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    @media (max-width: 860px){ .features-strip{ grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px){ .features-strip{ grid-template-columns: 1fr; } }
+    .feature-item{
+      display:flex; align-items:center; gap:.85rem;
+      padding: 1.15rem 1.25rem;
+      border-right: 1px solid var(--border);
+    }
+    .feature-item:last-child{ border-right: 0; }
+    @media (max-width: 860px){
+      .feature-item:nth-child(2){ border-right: 0; }
+      .feature-item:nth-child(odd){ border-right: 1px solid var(--border); }
+      .feature-item{ border-bottom: 1px solid var(--border); }
+      .feature-item:nth-child(3), .feature-item:nth-child(4){ border-bottom: 0; }
+    }
+    .feat-icon{
+      width: 40px; height: 40px; border-radius: 12px;
+      background: linear-gradient(135deg,var(--accent1),var(--accent3));
+      display:flex; align-items:center; justify-content:center;
+      font-size: 1.2rem; flex-shrink:0;
+    }
+    .feat-label{ font-weight:700; font-size: .9rem; }
+    .feat-sub{ font-size: .8rem; color: var(--muted); margin-top:.1rem; }
+
+    /* === TESTIMONIALS === */
+    .testimonials-grid{
+      display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem;
+    }
+    @media (max-width: 860px){ .testimonials-grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px){ .testimonials-grid{ grid-template-columns: 1fr; } }
+    .testi-card{
+      background: rgba(255,255,255,.88);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1.25rem;
+    }
+    .stars{ color: #f59e0b; font-size: 1rem; letter-spacing:.05em; margin-bottom:.65rem;}
+    .testi-text{ font-size:.95rem; color: rgba(16,18,35,.85); line-height:1.5; }
+    .testi-author{ margin-top:.85rem; font-weight:700; font-size:.88rem; color:var(--muted);}
+
+    /* === SECTION BADGE === */
+    .section-badge{
+      display:inline-flex; align-items:center; gap:.45rem;
+      background: rgba(155,113,255,.10);
+      border: 1px solid rgba(155,113,255,.22);
+      color: rgba(100,60,200,.90);
+      border-radius:999px; padding: .35rem .75rem;
+      font-size:.78rem; font-weight:800; letter-spacing:.07em;
+      text-transform:uppercase; margin-bottom:.6rem;
+    }
+
+    /* Product tabs */
+    .prod-tabs{ display:flex; gap:.65rem; flex-wrap:wrap; margin-bottom:1.25rem; }
+    .prod-tab{
+      padding:.5rem 1.1rem;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.70);
+      font-weight:700; font-size:.9rem;
+      cursor:pointer; transition: all .18s;
+    }
+    .prod-tab.active{
+      background: linear-gradient(90deg,var(--accent1),var(--accent3));
+      color:#fff; border-color:transparent;
+    }
+    .prod-tab:hover:not(.active){ background: rgba(255,255,255,.95); }
+
     :root{
       --bg0:#fbfbfd;
       --bg1:#f3f5f9;
@@ -88,7 +231,7 @@
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
       color:var(--text);
       background:
         radial-gradient(900px 500px at 15% 10%, rgba(255,90,148,.10), transparent 55%),
@@ -168,21 +311,22 @@
       font-weight:900; letter-spacing:.04em; text-decoration:none;
     }
     .brand-text{
-      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+      font-family:'Playfair Display', Georgia, serif;
       font-weight:900;
       letter-spacing:-.01em;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       line-height: 1;
     }
     @media (max-width: 420px){
       .brand-text{ font-size: 1.0rem; }
       .logo-img{ height: 32px; }
     }
+
     .brand-text{
-      font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+      font-family:'Playfair Display', Georgia, serif;
       font-weight:900;
       letter-spacing:-.01em;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       line-height: 1;
     }
     @media (max-width: 420px){
@@ -314,7 +458,7 @@
       align-items:center;
     }
     @media (max-width: 980px){ .hero-grid{grid-template-columns:1fr;} }
-    h1,h2,h3{font-family:"Space Grotesk", Inter, system-ui, sans-serif; line-height:1.08; margin:0;}
+    h1,h2,h3{font-family:'Playfair Display', Georgia, serif; line-height:1.08; margin:0;}
     h1{font-size: clamp(2.2rem, 4vw, 3.4rem); letter-spacing:-.02em;}
     h2{font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing:-.02em;}
     .hero p{max-width: 58ch; margin:.9rem 0 1.2rem;}
@@ -584,6 +728,44 @@
 
 <body>
 
+  <!-- Marquee ticker bar (Farmley-inspired) -->
+  <div class="marquee-bar" aria-label="Store highlights">
+    <div class="marquee-track">
+      <div class="marquee-inner" aria-hidden="true">
+        <span class="marquee-item">⭐ 4.8 Customer Rating</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🛡️ FSSAI Certified</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🚚 Ships from New Delhi</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🕐 6 Month Shelf Life</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">💬 Order in 1 min on WhatsApp</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🎁 Gifting Packs Available</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🌿 No Artificial Preservatives</span>
+        <span class="marquee-sep">✦</span>
+      </div>
+      <div class="marquee-inner" aria-hidden="true">
+        <span class="marquee-item">⭐ 4.8 Customer Rating</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🛡️ FSSAI Certified</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🚚 Ships from New Delhi</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🕐 6 Month Shelf Life</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">💬 Order in 1 min on WhatsApp</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🎁 Gifting Packs Available</span>
+        <span class="marquee-sep">✦</span>
+        <span class="marquee-item">🌿 No Artificial Preservatives</span>
+        <span class="marquee-sep">✦</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Top bar -->
   <div class="topbar">
     <div class="announce" role="region" aria-label="Store announcements">
@@ -644,7 +826,7 @@
     <div class="container">
       <div class="hero-grid">
         <div>
-          <div class="pill"><span class="mark" aria-hidden="true"></span> Premium makhana • airy crunch • bold desi flavors</div>
+          <div class="pill"><span class="mark" aria-hidden="true"></span> ⭐ 4.8 rated · Premium makhana · Bold desi flavors</div>
           <h1 style="margin-top:.9rem;">Crunch you’ll crave.<br/>Clean snacking you’ll repeat.</h1>
           <p class="muted">
             Popkaari is built for chai breaks, office drawers, travel bags, and gifting.
@@ -682,7 +864,7 @@
         <div class="hero-card" aria-label="Popkaari lifestyle photo">
           <!-- Replace with your own product/lifestyle images for better brand trust -->
           <img alt="A clean, premium snack moment" loading="lazy"
-               src="images/Raw.jpeg" />
+               src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=1200&q=80" />
           <div class="pad">
             <div class="kicker">Today’s best pick</div>
             <div style="display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-top:.35rem;">
@@ -696,11 +878,46 @@
     </div>
   </div>
 
+  <!-- Features strip -->
+  <div class="container">
+    <div class="features-strip">
+      <div class="feature-item">
+        <div class="feat-icon">🌾</div>
+        <div>
+          <div class="feat-label">Premium Makhana</div>
+          <div class="feat-sub">Sourced fresh, packed clean</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feat-icon">💬</div>
+        <div>
+          <div class="feat-label">WhatsApp Ordering</div>
+          <div class="feat-sub">Reply in minutes</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feat-icon">🛡️</div>
+        <div>
+          <div class="feat-label">FSSAI Certified</div>
+          <div class="feat-sub">License #13326998000075</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feat-icon">🎁</div>
+        <div>
+          <div class="feat-label">Gift Friendly</div>
+          <div class="feat-sub">Clean packs for everyone</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Why -->
   <section id="why">
     <div class="container">
       <div class="section-head">
         <div>
+          <div class="section-badge">✨ Our Difference</div>
           <h2>Why Popkaari</h2>
           <div class="muted">Premium by design — from sourcing to roast to that first crunch.</div>
         </div>
@@ -708,23 +925,29 @@
 
       <div class="cards">
         <div class="card">
-          <img alt="Fresh roasted snack close up" loading="lazy" src="images/Raw.jpeg" />
+          <div class="card-media">
+            <img alt="Fresh roasted snack close up" loading="lazy" src="https://images.unsplash.com/photo-1606914501449-5a96b6ce24ca?w=800&q=80" />
+          </div>
           <div class="body">
             <h3>Airy crunch, clean finish</h3>
-            <p class="muted">Light bite that doesn’t feel oily or heavy — made for everyday snacking.</p>
+            <p class="muted">Light bite that doesn't feel oily or heavy — made for everyday snacking.</p>
           </div>
         </div>
         <div class="card">
-          <img alt="Office desk snack moment" loading="lazy" src="images/Office snakc.jpeg" />
+          <div class="card-media">
+            <img alt="Office desk snack moment" loading="lazy" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" />
+          </div>
           <div class="body">
             <h3>Built for routines</h3>
             <p class="muted">11am hunger, 5pm chai, late-night munching — Popkaari fits the gap.</p>
           </div>
         </div>
         <div class="card">
-          <img alt="Gift box and festive snack vibe" loading="lazy" src="images/Gift packing.jpeg" />
+          <div class="card-media">
+            <img alt="Gift box and festive snack vibe" loading="lazy" src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&q=80" />
+          </div>
           <div class="body">
-            <h3>Travel & gifting friendly</h3>
+            <h3>Travel &amp; gifting friendly</h3>
             <p class="muted">Clean packs for bags, desks, and “take something nice” visits.</p>
           </div>
         </div>
@@ -737,6 +960,7 @@
     <div class="container">
       <div class="section-head">
         <div>
+          <div class="section-badge">🛍️ Our Range</div>
           <h2>Products</h2>
           <div class="muted">Raw Makhana is available now. Classic & Peri Peri are restocking soon.</div>
         </div>
@@ -749,9 +973,12 @@
       <div class="cards">
         <!-- RAW -->
         <div class="card">
-          <img alt="Raw makhana in a bowl" loading="lazy" src="images/Raw.jpeg" />
+          <div class="card-media">
+            <img alt="Raw makhana in a bowl" loading="lazy" src="https://images.unsplash.com/photo-1540914124281-342587941389?w=800&q=80" />
+            <img class="img-hover" alt="Raw makhana close up" loading="lazy" src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&q=80" />
+          </div>
           <div class="body">
-            <div class="badge instock">IN STOCK</div>
+            <div class="badge instock">✓ IN STOCK</div>
             <h3>Raw Makhana</h3>
             <p class="muted">Pure + versatile. Roast it your way, add to kheer, or build your own mixes.</p>
             <div class="price">₹249 <span class="muted" style="font-weight:600;">/ 100g • all inclusive</span></div>
@@ -763,15 +990,19 @@
               <button class="button" type="button" data-open-perk data-interest="Raw Makhana">Get ₹50 off</button>
             </div>
             <div class="muted fineprint" style="margin-top:.75rem;">
+              FSSAI: <strong>13326998000075</strong> • Packed in <strong>New Delhi</strong> • Shelf life <strong>6 months</strong>
             </div>
           </div>
         </div>
 
         <!-- CLASSIC -->
         <div class="card">
-          <img alt="Salted snack bowl" loading="lazy" src="images/classic.jpeg" />
+          <div class="card-media">
+            <img alt="Salted snack bowl" loading="lazy" src="https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=800&q=80" />
+            <img class="img-hover" alt="Classic salted makhana" loading="lazy" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=800&q=80" />
+          </div>
           <div class="body">
-            <div class="badge out">OUT OF STOCK</div>
+            <div class="badge out">RESTOCKING SOON</div>
             <h3>Classic Salted</h3>
             <p class="muted">Clean, airy crunch. The anytime favourite.</p>
             <div class="price">₹80 <span class="muted" style="font-weight:600;">/ 70g</span></div>
@@ -788,9 +1019,12 @@
 
         <!-- PERI -->
         <div class="card">
-          <img alt="Spicy snack bowl" loading="lazy" src="images/peri-peri.jpeg" />
+          <div class="card-media">
+            <img alt="Spicy snack bowl" loading="lazy" src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80" />
+            <img class="img-hover" alt="Peri peri makhana" loading="lazy" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80" />
+          </div>
           <div class="body">
-            <div class="badge out">OUT OF STOCK</div>
+            <div class="badge out">RESTOCKING SOON</div>
             <h3>Peri Peri</h3>
             <p class="muted">Bold, tangy spice with a light crunch.</p>
             <div class="price">₹82 <span class="muted" style="font-weight:600;">/ 70g</span></div>
@@ -855,7 +1089,7 @@
         </div>
 
         <div class="card">
-          <img alt="Mobile chat ordering" loading="lazy" src="https://source.unsplash.com/1200x800/?whatsapp,chat,phone" />
+          <img alt="Mobile chat ordering" loading="lazy" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80" />
           <div class="body">
             <div class="kicker">What you’ll get in chat</div>
             <ul class="muted" style="margin:.65rem 0 0; padding-left: 1.15rem;">
@@ -913,6 +1147,37 @@
               <button class="button" type="button" data-open-perk data-interest="Support / Bulk / Gifting">Email offers</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="section-badge">⭐ Reviews</div>
+          <h2>What customers say</h2>
+          <div class="muted">Real people, real snacking moments.</div>
+        </div>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <div class="testi-text">"Finally a makhana brand that actually tastes fresh. The raw makhana is perfect — roasted it myself with butter and it was incredible!"</div>
+          <div class="testi-author">— Priya S., New Delhi</div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <div class="testi-text">"Ordered via WhatsApp and got a reply in 2 minutes. Delivery was fast, packaging was sealed well. Will reorder for sure."</div>
+          <div class="testi-author">— Rahul M., Gurugram</div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <div class="testi-text">"Gifted a pack during Diwali. My entire family loved it. It's the kind of snack you keep reaching for without guilt."</div>
+          <div class="testi-author">— Ananya K., Noida</div>
         </div>
       </div>
     </div>
