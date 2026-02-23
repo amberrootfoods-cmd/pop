@@ -840,11 +840,16 @@
           </div>
 
           <!-- Email capture (hero) -->
-          <form class="email-row" id="heroEmailForm" aria-label="Email signup">
+        <form class="email-row" id="heroEmailForm" method="POST"
+                action="https://6d8b2886.sibforms.com/serve/MUIFAC-nN5er3RlQXmKXUVPuRZltNcMN4efAYsfux-93IrM9WSKlkEv8Q60Ilh5XMGIy7jcDafa7m7wKu1oJJZUSMLLmf6aiZhsUXDZmWm4Bd-zmYojSYvLamohTV8WfX260UzoFqHQ74rORbY4Qf6yMxxrbk_a35VLoQZKcMVCnczHXXtNuIW6I910ewYZ6PdBRqwl6Z1frire9TQ=="
+                aria-label="Email signup">
             <label class="sr-only" for="heroEmail">Email</label>
-            <input class="input" id="heroEmail" name="email" type="email" placeholder="Email for ₹50 off + restock alerts" autocomplete="email" required style="height: 49.2px; flex: 1 1 20px;" />
+            <input class="input" id="heroEmail" name="EMAIL" type="email"
+                   placeholder="Email for ₹50 off + restock alerts" autocomplete="email" required />
+            <input type="text" name="email_address_check" value="" style="display:none;">
+            <input type="hidden" name="locale" value="en">
+            <input type="hidden" name="html_type" value="simple">
             <button class="button primary" type="submit">Send code</button>
-          </form>
           <div class="consent">
             By signing up, you agree to receive marketing emails from Popkaari. Unsubscribe anytime.
             <a href="#policies">Privacy</a>.
