@@ -855,9 +855,7 @@
           </div>
 
           <!-- Email capture (hero) -->
-        <form class="email-row" id="heroEmailForm" method="POST"
-                action="https://6d8b2886.sibforms.com/serve/MUIFAC-nN5er3RlQXmKXUVPuRZltNcMN4efAYsfux-93IrM9WSKlkEv8Q60Ilh5XMGIy7jcDafa7m7wKu1oJJZUSMLLmf6aiZhsUXDZmWm4Bd-zmYojSYvLamohTV8WfX260UzoFqHQ74rORbY4Qf6yMxxrbk_a35VLoQZKcMVCnczHXXtNuIW6I910ewYZ6PdBRqwl6Z1frire9TQ=="
-                aria-label="Email signup">
+        <form class="email-row" id="heroEmailForm" aria-label="Email signup">
             <label class="sr-only" for="heroEmail">Email</label>
             <input class="input" id="heroEmail" name="EMAIL" type="email"
                    placeholder="Email for ₹50 off + restock alerts" autocomplete="email" required />
@@ -1593,60 +1591,60 @@ function openPerk(interest){
           return { ok: true, normalized: (local + "@" + domain).toLowerCase() };
         }
 
-        function bindForm(form, defaultInterest){
-          if(!form) return;
+       const BREVO_ENDPOINT = "https://6d8b2886.sibforms.com/serve/MUIFAC-nN5er3RlQXmKXUVPuRZltNcMN4efAYsfux-93IrM9WSKlkEv8Q60Ilh5XMGIy7jcDafa7m7wKu1oJJZUSMLLmf6aiZhsUXDZmWm4Bd-zmYojSYvLamohTV8WfX260UzoFqHQ74rORbY4Qf6yMxxrbk_a35VLoQZKcMVCnczHXXtNuIW6I910ewYZ6PdBRqwl6Z1frire9TQ==";
 
-          form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+function bindForm(form, defaultInterest){
+  if(!form) return;
 
-            const emailEl = form.querySelector('input[type="email"]');
-            if(!emailEl){
-              toast("Email field missing");
-              return;
-            }
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-            // Clear any previous custom validation message
-            emailEl.setCustomValidity("");
+    const emailEl = form.querySelector('input[type="email"]');
+    if(!emailEl){ toast("Email field missing"); return; }
 
-            const v = validateEmailAddress(emailEl.value);
-            if(!v.ok){
-              emailEl.setCustomValidity(v.message || "Please enter a valid email address.");
-              if(typeof emailEl.reportValidity === "function") emailEl.reportValidity();
-              toast("Please enter a valid email");
-              return;
-            }
+    emailEl.setCustomValidity("");
 
-            const email = v.normalized;
-            emailEl.value = email;
+    const v = validateEmailAddress(emailEl.value);
+    if(!v.ok){
+      emailEl.setCustomValidity(v.message || "Please enter a valid email address.");
+      if(typeof emailEl.reportValidity === "function") emailEl.reportValidity();
+      toast("Please enter a valid email");
+      return;
+    }
 
-            const interest = defaultInterest || interestInput.value || "";
-            const payload = { email, interest, source: form.id, ts: new Date().toISOString() };
+    const email = v.normalized;
+    emailEl.value = email;
 
-            // Save locally so we don't keep nagging the same visitor
-            markCaptured(email, interest);
-            try{ gtag('event','sign_up',{method:'email', value:1}); }catch(e){}
+    markCaptured(email, defaultInterest || "");
+    try{ gtag('event','sign_up',{method:'email', value:1}); }catch(err){}
 
-            const res = await sendSignup(payload);
+    // Send to Brevo silently (no page navigation)
+    try{
+      const body = new URLSearchParams();
+      body.append("EMAIL", email);
+      body.append("email_address_check", "");
+      body.append("locale", "en");
+      body.append("html_type", "simple");
+      fetch(BREVO_ENDPOINT, { method:"POST", mode:"no-cors", body });
+    }catch(err){}
 
-            if(!res.ok && res.reason === "no-endpoint"){
-              toast("Saved on this device — connect storage to save permanently");
-            } else if(!res.ok){
-              toast("Couldn’t save — check storage endpoint");
-            } else {
-              toast("Subscribed!");
-            }
+    // Also send to your own endpoint if configured
+    const interest = defaultInterest || (typeof interestInput !== "undefined" ? interestInput.value : "") || "";
+    const payload = { email, interest, source: form.id, ts: new Date().toISOString() };
+    await sendSignup(payload);
 
-            // Show code inside the modal
-            if(form.id === "modalEmailForm"){
-              successBox.style.display = "block";
-            } else {
-              openPerk(interest || "General");
-              const modalEmail = document.getElementById("modalEmail");
-              if(modalEmail) modalEmail.value = email;
-              successBox.style.display = "block";
-            }
-          });
-        }
+    toast("Subscribed! 🎉");
+
+    if(form.id === "modalEmailForm"){
+      successBox.style.display = "block";
+    } else {
+      openPerk(interest || "General");
+      const modalEmail = document.getElementById("modalEmail");
+      if(modalEmail) modalEmail.value = email;
+      successBox.style.display = "block";
+    }
+  });
+}
 
         // Bind modal opens
         document.querySelectorAll("[data-open-perk]").forEach(el => {
