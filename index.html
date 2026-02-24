@@ -579,26 +579,41 @@
 
     /* Email capture UI */
     .input{
-      width:100%;
-      padding: .85rem .95rem;
-      border-radius: 999px;
-      border: 1px solid rgba(16,18,35,.16);
-      background: rgba(255,255,255,.92);
-      font-weight: 600;
-      color: var(--text);
-      box-shadow: 0 10px 30px rgba(16,18,35,.05);
-    }
-    .input::placeholder{ color: rgba(16,18,35,.55); font-weight: 600; }
-    .input:focus{ outline:none; border-color: rgba(155,113,255,.45); }
+  width:100%;
+  padding: .75rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(16,18,35,.16);
+  background: rgba(255,255,255,.92);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--text);
+  box-shadow: 0 4px 14px rgba(16,18,35,.05);
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  height: auto;
+  min-height: 0;
+}
     .email-row{
-      display:flex;
-      gap: .65rem;
-      flex-wrap: wrap;
-      align-items:center;
-      margin-top: 1rem;
-      max-width: 640px;
-    }
-    .email-row .input{ flex: 1 1 260px; }
+  display:flex;
+  gap: .65rem;
+  flex-wrap: wrap;
+  align-items:stretch;
+  margin-top: 1rem;
+  max-width: 640px;
+}
+.email-row .input{ flex: 1 1 220px; }
+.email-row .button{ flex-shrink: 0; white-space: nowrap; }
+
+/* Modal form: stacked full-width layout */
+#modalEmailForm{
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 100%;
+}
+#modalEmailForm .input{ flex: none; width: 100%; }
+#modalEmailForm .button{ width: 100%; justify-content: center; }
     .consent{
       margin-top: .55rem;
       color: rgba(16,18,35,.62);
