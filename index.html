@@ -322,18 +322,6 @@
       .logo-img{ height: 32px; }
     }
 
-    .brand-text{
-      font-family:'Playfair Display', Georgia, serif;
-      font-weight:900;
-      letter-spacing:-.01em;
-      font-size: 1.15rem;
-      line-height: 1;
-    }
-    @media (max-width: 420px){
-      .brand-text{ font-size: 1.0rem; }
-      .logo-img{ height: 32px; }
-    }
-
     .logo-img{
       height: 34px;
       width: auto;
@@ -603,7 +591,10 @@
   margin-top: 1rem;
   max-width: 640px;
 }
-.email-row .input{ flex: 1 1 220px; }
+.email-row .input{ flex: 1 1 260px; }
+#modalEmailForm{ flex-direction: column; align-items: stretch; max-width: 100%; }
+#modalEmailForm .input{ flex: none; width: 100%; }
+#modalEmailForm .button{ width: 100%; justify-content: center; }
 .email-row .button{ flex-shrink: 0; white-space: nowrap; }
 
 /* Modal form: stacked full-width layout */
@@ -863,6 +854,7 @@
             <input type="hidden" name="locale" value="en">
             <input type="hidden" name="html_type" value="simple">
             <button class="button primary" type="submit">Send code</button>
+          </form>
           <div class="consent">
             By signing up, you agree to receive marketing emails from Popkaari. Unsubscribe anytime.
             <a href="#policies">Privacy</a>.
@@ -1302,8 +1294,6 @@
               <a href="#" aria-label="Terms">Terms</a> ·
               <a href="#" aria-label="Returns">Returns</a>
             </p>
-            <p class="muted" style="margin:.55rem 0 0; font-size:.92rem;"
-            </p>
           </div>
         </div>
       </div>
@@ -1593,7 +1583,57 @@ function openPerk(interest){
 
        const BREVO_ENDPOINT = "https://6d8b2886.sibforms.com/serve/MUIFAC-nN5er3RlQXmKXUVPuRZltNcMN4efAYsfux-93IrM9WSKlkEv8Q60Ilh5XMGIy7jcDafa7m7wKu1oJJZUSMLLmf6aiZhsUXDZmWm4Bd-zmYojSYvLamohTV8WfX260UzoFqHQ74rORbY4Qf6yMxxrbk_a35VLoQZKcMVCnczHXXtNuIW6I910ewYZ6PdBRqwl6Z1frire9TQ==";
 
+const BREVO_ENDPOINT = "https://6d8b2886.sibforms.com/serve/MUIFAC-nN5er3RlQXmKXUVPuRZltNcMN4efAYsfux-93IrM9WSKlkEv8Q60Ilh5XMGIy7jcDafa7m7wKu1oJJZUSMLLmf6aiZhsUXDZmWm4Bd-zmYojSYvLamohTV8WfX260UzoFqHQ74rORbY4Qf6yMxxrbk_a35VLoQZKcMVCnczHXXtNuIW6I910ewYZ6PdBRqwl6Z1frire9TQ==";
+
 function bindForm(form, defaultInterest){
+  if(!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const emailEl = form.querySelector('input[type="email"]');
+    if(!emailEl){ toast("Email field missing"); return; }
+
+    emailEl.setCustomValidity("");
+
+    const v = validateEmailAddress(emailEl.value);
+    if(!v.ok){
+      emailEl.setCustomValidity(v.message || "Please enter a valid email address.");
+      if(typeof emailEl.reportValidity === "function") emailEl.reportValidity();
+      toast("Please enter a valid email");
+      return;
+    }
+
+    const email = v.normalized;
+    emailEl.value = email;
+
+    markCaptured(email, defaultInterest || "");
+    try{ gtag('event','sign_up',{method:'email', value:1}); }catch(err){}
+
+    // Send to Brevo silently — no page navigation
+    try{
+      const body = new URLSearchParams();
+      body.append("EMAIL", email);
+      body.append("email_address_check", "");
+      body.append("locale", "en");
+      body.append("html_type", "simple");
+      fetch(BREVO_ENDPOINT, { method:"POST", mode:"no-cors", body });
+    }catch(err){}
+
+    toast("Subscribed! 🎉");
+
+    const interest = defaultInterest || (typeof interestInput !== "undefined" ? interestInput.value : "") || "";
+
+    if(form.id === "modalEmailForm"){
+      successBox.style.display = "block";
+    } else {
+      openPerk(interest || "General");
+      const modalEmail = document.getElementById("modalEmail");
+      if(modalEmail) modalEmail.value = email;
+      successBox.style.display = "block";
+    }
+  });
+}
   if(!form) return;
 
   form.addEventListener("submit", async (e) => {
