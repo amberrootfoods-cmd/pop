@@ -110,7 +110,7 @@
       overflow:hidden;
     }
     .card-media img{
-      width:100%; height: 300px; object-fit:cover; object-position: center top; display:block;
+      width:100%; height: 360px; object-fit:contain; object-position: center center; display:block; background: #f8f6f2;
       transition: opacity .3s ease;
     }
     .card-media .img-hover{
@@ -710,7 +710,7 @@
       .container{ padding: 0 1rem; }
       .hero{ padding: 2.4rem 0 1.2rem; }
       .hero-card img{ height: 240px; }
-      .card img{ height: 240px; }
+      .card img{ height: 300px; }
       .cta-row{ flex-direction: column; align-items: stretch; }
       .cta-row .button{ width: 100%; justify-content: center; }
       .email-row{ flex-direction: column; align-items: stretch; }
@@ -723,7 +723,7 @@
     /* Tablet refinements */
     @media (min-width: 641px) and (max-width: 980px){
       .hero-card img{ height: 300px; }
-      .card img{ height: 270px; }
+      .card img{ height: 320px; }
     }
 
 @media (prefers-reduced-motion: reduce){
