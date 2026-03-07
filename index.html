@@ -369,7 +369,39 @@
       box-shadow:none;
     }
     .button.small{ padding:.55rem .95rem; font-size:.9rem; }
+/* ===== ACCENT-BASED MARKETPLACE BUTTONS ===== */
+.button.amazon{
+  background: linear-gradient(135deg, #ff5a94, #ff8fb3);
+  color: #fff;
+  border: 0;
+  box-shadow: 0 14px 36px rgba(255, 90, 148, 0.20);
+}
+.button.amazon:hover{ 
+  filter: brightness(1.05);
+  box-shadow: 0 18px 44px rgba(255, 90, 148, 0.25);
+}
 
+.button.blinkit{
+  background: linear-gradient(135deg, #5af0ff, #7df5ff);
+  color: #0f1419;
+  border: 0;
+  box-shadow: 0 14px 36px rgba(90, 240, 255, 0.15);
+}
+.button.blinkit:hover{ 
+  filter: brightness(0.98);
+  box-shadow: 0 18px 44px rgba(90, 240, 255, 0.20);
+}
+
+.button.whatsapp{
+  background: linear-gradient(135deg, #9b71ff, #b895ff);
+  color: #fff;
+  border: 0;
+  box-shadow: 0 14px 36px rgba(155, 113, 255, 0.18);
+}
+.button.whatsapp:hover{ 
+  filter: brightness(1.05);
+  box-shadow: 0 18px 44px rgba(155, 113, 255, 0.22);
+}
     /* Mobile menu (hamburger) */
     .iconbtn{
       width: 44px; height: 44px;
@@ -822,7 +854,9 @@
         <div class="divider" role="separator" aria-hidden="true"></div>
 
         <div class="mobile-actions">
-          <a class="button primary" href="#order" data-close-menu>Buy on WhatsApp</a>
+          <a class="button amazon" href="https://www.amazon.in/dp/B0GRJR591N" target="_blank" rel="noopener noreferrer" data-close-menu>🛍️ Buy on Amazon</a>
+<a class="button blinkit" href="https://blinkit.com" target="_blank" rel="noopener noreferrer" data-close-menu>⚡ Get on Blinkit</a>
+<a class="button whatsapp" href="https://wa.me/919910657383?text=Hi%20Popkaari%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" rel="noopener noreferrer" data-close-menu>💬 Order on WhatsApp</a>
           <button class="button" type="button" data-open-perk data-close-menu>Get ₹50 off</button>
         </div>
       </div>
@@ -842,10 +876,16 @@
           </p>
 
           <div class="cta-row">
-            <a class="button primary" href="#order">Buy Raw Makhana</a>
-            <a class="button" href="#products">See products</a>
-            <button class="button ghost" type="button" data-open-perk>Get ₹50 off</button>
-          </div>
+  <a class="button amazon" href="https://www.amazon.in/dp/B0GRJR591N" target="_blank" rel="noopener noreferrer">🛍️ Buy on Amazon</a>
+  <a class="button blinkit" href="https://blinkit.com" target="_blank" rel="noopener noreferrer">⚡ Get on Blinkit</a>
+  <a class="button whatsapp" href="https://wa.me/919910657383?text=Hi%20Popkaari%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" rel="noopener noreferrer">💬 Order on WhatsApp</a>
+</div>
+
+<!-- Secondary buttons -->
+<div style="margin-top: 0.75rem;">
+  <a class="button" href="#products">See all products</a>
+  <button class="button ghost" type="button" data-open-perk style="margin-left: 0.5rem;">Get ₹50 off</button>
+</div>
 
           <!-- Email capture (hero) -->
         <form class="email-row" id="heroEmailForm" aria-label="Email signup">
@@ -977,9 +1017,10 @@
           <div class="muted">Raw Makhana is available now. Classic & Peri Peri are restocking soon.</div>
         </div>
         <div class="cta-row">
-          <a class="button primary" href="#order">Buy on WhatsApp</a>
-          <button class="button" type="button" data-open-perk>Get ₹50 off</button>
-        </div>
+  <a class="button amazon" href="https://www.amazon.in/dp/B0GRJR591N" target="_blank" rel="noopener noreferrer">🛍️ Buy on Amazon</a>
+  <a class="button blinkit" href="https://blinkit.com" target="_blank" rel="noopener noreferrer">⚡ Get on Blinkit</a>
+  <a class="button whatsapp" href="https://wa.me/919910657383?text=Hi%20Popkaari%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" rel="noopener noreferrer">💬 Order on WhatsApp</a>
+</div>
       </div>
 
       <div class="cards">
@@ -995,12 +1036,13 @@
             <p class="muted">Pure + versatile. Roast it your way, add to kheer, or build your own mixes.</p>
             <div class="price">₹249 <span class="muted" style="font-weight:600;">/ 100g • all inclusive</span></div>
             <div class="cta-row">
-              <a class="button primary" target="_blank" rel="noopener"
-                 href="https://wa.me/919910657383?text=Hi%20Popkaari!%20I%20want%20to%20buy%20Raw%20Makhana%20100g%20for%20%E2%82%B9249%20(all%20inclusive).%20Please%20share%20the%20payment%20link%20and%20delivery%20timeline%20for%20New%20Delhi.">
-                Buy on WhatsApp
-              </a>
-              <button class="button" type="button" data-open-perk data-interest="Raw Makhana">Get ₹50 off</button>
-            </div>
+  <a class="button amazon" href="https://www.amazon.in/dp/B0GRJR591N" target="_blank" rel="noopener noreferrer">🛍️ Amazon</a>
+  <a class="button blinkit" href="https://blinkit.com" target="_blank" rel="noopener noreferrer">⚡ Blinkit</a>
+  <a class="button whatsapp" target="_blank" rel="noopener noreferrer"
+     href="https://wa.me/919910657383?text=Hi%20Popkaari!%20I%20want%20to%20buy%20Raw%20Makhana%20100g%20for%20%E2%82%B9249%20(all%20inclusive).%20Please%20share%20the%20payment%20link%20and%20delivery%20timeline%20for%20New%20Delhi.">
+    💬 WhatsApp
+  </a>
+</div>
             <div class="muted fineprint" style="margin-top:.75rem;">
               FSSAI: <strong>13326998000075</strong> • Packed in <strong>New Delhi</strong> • Shelf life <strong>6 months</strong>
             </div>
@@ -1018,13 +1060,14 @@
             <h3>Classic Salted</h3>
             <p class="muted">Clean, airy crunch. The anytime favourite.</p>
             <div class="price">₹80 <span class="muted" style="font-weight:600;">/ 70g • all inclusive</span></div>
-            <div class="cta-row">
-              <a class="button primary" target="_blank" rel="noopener"
-                 href="https://wa.me/919910657383?text=Hi%20Popkaari!%20Please%20notify%20me%20when%20Classic%20Salted%2070g%20is%20back%20in%20stock.%20My%20city%20is%20New%20Delhi.">
-                Notify on WhatsApp
-              </a>
-              <button class="button" type="button" data-open-perk data-interest="Classic Salted (Restock)">Get ₹50 off</button>
-            </div>
+           <div class="cta-row">
+  <a class="button amazon" href="https://www.amazon.in/dp/B0GRJR591N" target="_blank" rel="noopener noreferrer">🛍️ Amazon</a>
+  <a class="button blinkit" href="https://blinkit.com" target="_blank" rel="noopener noreferrer">⚡ Blinkit</a>
+  <a class="button whatsapp" target="_blank" rel="noopener noreferrer"
+     href="https://wa.me/919910657383?text=Hi%20Popkaari!%20Please%20notify%20me%20when%20Classic%20Salted%2070g%20is%20back%20in%20stock.%20My%20city%20is%20New%20Delhi.">
+    💬 Notify
+  </a>
+</div>
             <div class="muted fineprint" style="margin-top:.75rem;">
               FSSAI: <strong>13326998000075</strong> • Packed in <strong>New Delhi</strong> • Shelf life <strong>6 months</strong>
             </div>
@@ -1043,12 +1086,13 @@
             <p class="muted">Bold, tangy spice with a light crunch.</p>
             <div class="price">₹82 <span class="muted" style="font-weight:600;">/ 70g • all inclusive</span></div>
             <div class="cta-row">
-              <a class="button primary" target="_blank" rel="noopener"
-                 href="https://wa.me/919910657383?text=Hi%20Popkaari!%20Please%20notify%20me%20when%20Peri%20Peri%2070g%20is%20back%20in%20stock.%20My%20city%20is%20New%20Delhi.">
-                Notify on WhatsApp
-              </a>
-              <button class="button" type="button" data-open-perk data-interest="Peri Peri (Restock)">Get ₹50 off</button>
-            </div>
+  <a class="button amazon" href="https://www.amazon.in/dp/B0GRJR591N" target="_blank" rel="noopener noreferrer">🛍️ Amazon</a>
+  <a class="button blinkit" href="https://blinkit.com" target="_blank" rel="noopener noreferrer">⚡ Blinkit</a>
+  <a class="button whatsapp" target="_blank" rel="noopener noreferrer"
+     href="https://wa.me/919910657383?text=Hi%20Popkaari!%20Please%20notify%20me%20when%20Peri%20Peri%2070g%20is%20back%20in%20stock.%20My%20city%20is%20New%20Delhi.">
+    💬 Notify
+  </a>
+</div>
             <div class="muted fineprint" style="margin-top:.75rem;">
               FSSAI: <strong>13326998000075</strong> • Packed in <strong>New Delhi</strong> • Shelf life <strong>6 months</strong>
             </div>
@@ -1064,21 +1108,16 @@
       <div class="split">
         <div class="card">
           <div class="body">
-            <h2>Order on WhatsApp</h2>
-            <p class="muted">
-              Fast ordering, quick replies, and easy payment links. Message us and we’ll guide you end‑to‑end.
-            </p>
+            <h2>Order Now</h2>
+<p class="muted">
+  Available on Amazon India, Blinkit, or direct via WhatsApp. Choose your preferred way to order.
+</p>
 
-            <div class="cta-row">
-              <a class="button primary" target="_blank" rel="noopener"
-                 href="https://wa.me/919910657383?text=Hi%20Popkaari!%20I%20want%20to%20buy%20Raw%20Makhana%20100g%20for%20%E2%82%B9249%20(all%20inclusive).%20Please%20share%20the%20payment%20link%20and%20delivery%20timeline%20for%20New%20Delhi.">
-                Buy Raw Makhana (₹249)
-              </a>
-              <a class="button" target="_blank" rel="noopener"
-                 href="https://wa.me/919910657383?text=Hi%20Popkaari!%20I%20have%20a%20question%20about%20delivery%20/%20bulk%20orders.">
-                Ask a question
-              </a>
-            </div>
+<div class="cta-row">
+  <a class="button amazon" href="https://www.amazon.in/dp/B0GRJR591N" target="_blank" rel="noopener noreferrer">🛍️ Buy on Amazon</a>
+  <a class="button blinkit" href="https://blinkit.com" target="_blank" rel="noopener noreferrer">⚡ Get on Blinkit</a>
+  <a class="button whatsapp" target="_blank" rel="noopener noreferrer" href="https://wa.me/919910657383?text=Hi%20Popkaari!%20I%20want%20to%20buy%20Raw%20Makhana%20100g%20for%20%E2%82%B9249%20(all%20inclusive).%20Please%20share%20the%20payment%20link%20and%20delivery%20timeline%20for%20New%20Delhi.">💬 Order on WhatsApp</a>
+</div>
 
             <div class="card" style="margin-top: 1rem;">
               <div class="body">
